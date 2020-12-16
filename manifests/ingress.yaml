@@ -1,0 +1,47 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: api
+  namespace: tripapi
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - http:
+      paths:
+      # .NET Core
+      - backend:
+          serviceName: poi
+          servicePort: 80
+        path: /api/poi
+      # Node.js
+      - backend:
+          serviceName: user
+          servicePort: 80
+        path: /api/user
+      # Java
+      - backend:
+          serviceName: user-java
+          servicePort: 80
+        path: /api/user-java
+      # Golang
+      - backend:
+          serviceName: trips
+          servicePort: 80
+        path: /api/trips
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: web
+  namespace: tripviewer
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: tripviewer
+          servicePort: 80
+        path: /
