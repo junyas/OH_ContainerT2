@@ -23,9 +23,22 @@ spec:
           limits:
             cpu: 250m
             memory: 256Mi
+        volumeMounts:
+        - name: secrets-store-inline
+          mountPath: "/secrets"
+          readOnly: true
         ports:
         - containerPort: 80
           name: poi
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: kv-secret
+            nodePublishSecretRef:
+              name: secrets-store-creds
 ---
 apiVersion: v1
 kind: Service

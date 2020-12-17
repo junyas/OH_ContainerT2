@@ -1,0 +1,27 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: web-to-full
+  namespace: tripviewer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: full-access
+subjects:
+- kind: Group
+  namespace: tripviewer
+  name: ace8221d-7770-4698-b1d8-74c2792d026e
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: web-to-reader
+  namespace: tripapi
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: reader
+subjects:
+- kind: Group
+  namespace: tripapi
+  name: ace8221d-7770-4698-b1d8-74c2792d026e
