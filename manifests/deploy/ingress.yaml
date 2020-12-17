@@ -16,7 +16,7 @@ spec:
         path: /api/poi
       # Node.js
       - backend:
-          serviceName: user
+          serviceName: userprofile
           servicePort: 80
         path: /api/user
       # Java
